@@ -1,0 +1,35 @@
+button{
+    position: fixed;
+    z-index: 999;
+    border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  
+    /*background-color: rgba(45, 4, 141, 0.658);
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+    border-radius: 2px;
+    border: 1px solid black;*/
+}
+
+/*button:hover{
+    background-color: rgb(132, 99, 252);
+    box-shadow: 0px 2px 2px 0px rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}*/
+
+#plusButton {
+    position: relative;
+    bottom: 2px;
+    right: -435px;
+    color: rgb(195, 110, 235);
+    width: 55px;
+    height: 55px;
+    transform: rotate(0);
+    transition: all 1s;
+}
+
+#plusButton:hover {
+    transition: all 1s;
+    transform: rotate(180deg);
+}

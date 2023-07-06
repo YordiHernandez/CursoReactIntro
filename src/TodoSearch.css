@@ -1,0 +1,36 @@
+@font-face{
+    font-family: 'welcome_spring';
+    src: url(./Fonts/welcome_spring/Welcome\ Spring\ demo.ttf);
+}
+
+input{
+    font-family: welcome_spring;
+    font-size: 1.7em;
+    border-radius: 30px;
+    background-color: rgba(43, 9, 75, 0.792);
+    color: rgb(255, 255, 255);
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-top: 5px;
+    border-color: rgba(13, 1, 23, 0.884);
+    margin-left: 5px;
+    margin-right: 5px;
+    box-shadow: 0px 0px 7px 0px ;
+}
+
+input:hover {
+    background-color: rgba(80, 38, 114, 0.856);
+}
+
+::placeholder {
+    font-family: welcome_spring;
+    text-align: center;
+    color: aliceblue;
+    font-size: 1.3em;
+}
+
+hr{
+    width: 100%;
+    border-style: solid;
+    border-color: rgb(128, 76, 251);
+}
