@@ -11,19 +11,50 @@ const defaultTodos = [
   { text: 'Cortar Cebolla' , completed: true},
   { text: 'Curso Intro React' , completed: false},
   { text: 'Llorar' , completed: false},
-  { text: 'JIJIJIA' , completed: false}
+  { text: 'JIJIJIA' , completed: true},
+  {text: 'hola' , completed: false}
 ]
 
 function App() {
+
+  const [searchValue, setSearchValue] = React.useState('');
+  console.log('Se busca:' + searchValue)
+
+  const [todos, setTodos] = React.useState(defaultTodos)
+
+  const completedTodos = todos.filter(todo => !!todo.completed /*doble negacion convierte cualquier resultdado en booleano*/).length;
+
+  const totalTodos = todos.length;
+
+  const searchedTodos = todos.filter(todo =>{return todo.text.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase())});
+
+  const completeTodo = (text) => {
+    const newTodos = [...todos]; //Crea una copia del array que le indico luego de los ...
+    const todoIndex = newTodos.findIndex((todo)=> todo.text == text);
+
+    newTodos[todoIndex].completed = true;
+    setTodos(newTodos);
+  }
+
+  const deleteTodo = (text) => {
+    const newTodos = [...todos]; //Crea una copia del array que le indico luego de los ...
+    const todoIndex = newTodos.findIndex((todo)=> todo.text == text);
+
+    newTodos.splice(todoIndex, 1); //splice sirve para 'tajar una posicion del array(indice, cantidad a borrar desde ese indice)
+    setTodos(newTodos);
+
+  }
+
+
   return (
     /* crea un fragmento de react ya que siempre se necesita un contenedor para renderizar , en dado caso no se quiera uno de xml*/
     <div id='containerMaster'>
-      <TodoCounter completed={16} total={25}/>
-      <TodoSearch />
+      <TodoCounter completed={completedTodos} total={totalTodos}/>
+      <TodoSearch searchValue={searchValue} setSearchValue={setSearchValue}/>
 
       <TodoList>
-        {defaultTodos.map(todo => ( 
-          <TodoItem key={todo.text} text={todo.text} completed={todo.completed} />
+        {searchedTodos.map(todo => ( 
+          <TodoItem key={todo.text} text={todo.text} completed={todo.completed} onComplete={()=> completeTodo(todo.text)} onDelete={()=> deleteTodo(todo.text)} />
         ))} {/* Por cada elemento del array se genera un nuevo array (todo recibe como parametro cada elemento) , entonces se genera una key para ca uno y se envia text para el item */}
 
       </TodoList>

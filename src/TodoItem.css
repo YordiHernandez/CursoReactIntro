@@ -45,6 +45,10 @@ input:checked + #check {
     text-decoration-color: black;
 }
 
+.Icon-delete:hover{
+    color: red;
+}
+
 #close {
     cursor: pointer;
   margin-right: 10px;

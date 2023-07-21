@@ -1,11 +1,12 @@
-import './TodoSearch.css'
 
-function TodoSearch () {
+import './TodoSearch.css'
+import React from 'react';
+
+function TodoSearch (props/*{searchValue, setSearchValue}*/) {
     return (
       <>
-      <input placeholder="Cortar Cebolla"  onChange={(event)=>{console.log("Cambiaste el texto")
-            console.log(event)
-            console.log(event.target)
+      <input placeholder="Cortar Cebolla"  className="TodoSearch" value={props.searchValue} onChange={(event)=>{
+            props.setSearchValue(event.target.value)
             console.log(event.target.value)}} />
       <br />
       <hr />
