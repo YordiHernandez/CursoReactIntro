@@ -32,6 +32,10 @@ li{
     font-size: 25px;
 }
 
+#check:hover{
+    color: rgb(20, 218, 20);
+}
+
 input:checked + #check {
     color: rgb(20, 218, 20);
 }

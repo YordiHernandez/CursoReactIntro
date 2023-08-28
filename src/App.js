@@ -7,7 +7,7 @@ import { TodoItem } from './TodoItem'; //ctr + enter ayuda a exportar componente
 import { CreateTodoButton } from './CreateTodoButton';
 import './App.css';
 
-const defaultTodos = [
+/*const defaultTodos = [
   { text: 'Cortar Cebolla' , completed: true},
   { text: 'Curso Intro React' , completed: false},
   { text: 'Llorar' , completed: false},
@@ -15,12 +15,39 @@ const defaultTodos = [
   {text: 'hola' , completed: false}
 ]
 
+localStorage.setItem('TODOS_V1', defaultTodos);
+localStorage.removeItem('TODOS_V1')*/
+
+function useLocalStorage(itemName, initialValue){ //CustomHook
+
+  const localStorageItem = localStorage.getItem(itemName); //Obtiene el item del localstorage
+  let parsedItem;
+
+  if (!localStorageItem){
+    localStorage.setItem(itemName, JSON.stringify(initialValue)); //asigna al localstorage un array vacio en caso de que local este vacio
+    parsedItem= initialValue;
+  } else {
+    parsedItem = JSON.parse(localStorageItem); //transforma el item a JSON
+  }
+
+  const [item, setItems] = React.useState(parsedItem);
+
+  const saveItem = (newItem) => {
+    localStorage.setItem(itemName, JSON.stringify(newItem));
+    setItems(newItem);
+  };
+
+  return [item, saveItem] //Se retorna lo que se necesita
+
+}
+
+
 function App() {
 
-  const [searchValue, setSearchValue] = React.useState('');
-  console.log('Se busca:' + searchValue)
+  const [todos, saveTodos] = useLocalStorage('TODOS_V1', []); /*todos es la variable donde se almacena el estado y setTodos es la funcion
+  que sirve para actualizar el estado de la variable donde se almacena*/
 
-  const [todos, setTodos] = React.useState(defaultTodos)
+  const [searchValue, setSearchValue] = React.useState('');
 
   const completedTodos = todos.filter(todo => !!todo.completed /*doble negacion convierte cualquier resultdado en booleano*/).length;
 
@@ -28,12 +55,14 @@ function App() {
 
   const searchedTodos = todos.filter(todo =>{return todo.text.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase())});
 
+  
+
   const completeTodo = (text) => {
     const newTodos = [...todos]; //Crea una copia del array que le indico luego de los ...
     const todoIndex = newTodos.findIndex((todo)=> todo.text == text);
 
     newTodos[todoIndex].completed = true;
-    setTodos(newTodos);
+    saveTodos(newTodos);
   }
 
   const deleteTodo = (text) => {
@@ -41,7 +70,7 @@ function App() {
     const todoIndex = newTodos.findIndex((todo)=> todo.text == text);
 
     newTodos.splice(todoIndex, 1); //splice sirve para 'tajar una posicion del array(indice, cantidad a borrar desde ese indice)
-    setTodos(newTodos);
+    saveTodos(newTodos);
 
   }
 
