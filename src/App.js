@@ -1,10 +1,10 @@
 import logo from './platzi.webp';
 import React from 'react';
-import { TodoCounter } from './TodoCounter'; //Importar el archivo con el COmponente
-import { TodoSearch } from './TodoSearch';
-import { TodoList } from './TodoList';
-import { TodoItem } from './TodoItem'; //ctr + enter ayuda a exportar componentes seleccionando el componente 
-import { CreateTodoButton } from './CreateTodoButton';
+import { TodoCounter } from './TodoCounter/TodoCounter'; //Importar el archivo con el COmponente
+import { TodoSearch } from './TodoSearch/TodoSearch';
+import { TodoList } from './TodoList/TodoList';
+import { TodoItem } from './TodoItem/TodoItem'; //ctr + enter ayuda a exportar componentes seleccionando el componente 
+import { CreateTodoButton } from './createTodoButton/CreateTodoButton';
 import './App.css';
 
 /*const defaultTodos = [
